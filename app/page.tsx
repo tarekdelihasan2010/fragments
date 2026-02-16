@@ -353,8 +353,9 @@ export default function Home() {
           isChatLoading={isLoading}
           isPreviewLoading={isPreviewLoading}
           fragment={fragment}
-          result={result as ExecutionResult}
+          result={result}
           onClose={() => setFragment(undefined)}
+          setChatInput={setChatInput} // Add this line
         />
       </div>
     </main>

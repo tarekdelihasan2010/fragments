@@ -1,0 +1,11 @@
+/* Light mode selection */
+pre ::selection, code ::selection {
+    background-color: #b3d4fc !important;
+    color: black !important;
+}
+
+/* Dark mode selection */
+.dark pre ::selection, .dark code ::selection {
+    background-color: #3b82f6 !important; 
+    color: white !important;
+}

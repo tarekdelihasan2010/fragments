@@ -1,4 +1,5 @@
 import './globals.css'
+import '@/components/ui/selection.css' // Add this line
 import { PostHogProvider, ThemeProvider } from './providers'
 import { Toaster } from '@/components/ui/toaster'
 import { Analytics } from '@vercel/analytics/next'

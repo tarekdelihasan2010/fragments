@@ -26,6 +26,7 @@ export function Preview({
   fragment,
   result,
   onClose,
+  setChatInput, // Add this line
 }: {
   teamID: string | undefined
   accessToken: string | undefined
@@ -36,6 +37,7 @@ export function Preview({
   fragment?: DeepPartial<FragmentSchema>
   result?: ExecutionResult
   onClose: () => void
+  setChatInput: Dispatch<SetStateAction<string>> // Add this line
 }) {
   if (!fragment) {
     return null
@@ -123,6 +125,7 @@ export function Preview({
                       content: fragment.code,
                     },
                   ]}
+                  setChatInput={setChatInput} // Add this line
                 />
               )}
             </TabsContent>

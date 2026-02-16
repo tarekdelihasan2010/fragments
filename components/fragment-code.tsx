@@ -1,19 +1,24 @@
-import { CodeView } from './code-view'
-import { Button } from './ui/button'
-import { CopyButton } from './ui/copy-button'
+import { Dispatch, SetStateAction } from 'react' // Add this line
+import { Download, FileText } from 'lucide-react'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { Download, FileText } from 'lucide-react'
+
+import { Button } from './ui/button'
+import { CodeView } from './code-view'
+import { CopyButton } from './ui/copy-button'
+import { HighlightedCodeView } from './highlighted-code-view' // Add this line
 import { useState } from 'react'
 
 export function FragmentCode({
   files,
+  setChatInput, // Add this line
 }: {
   files: { name: string; content: string }[]
+  setChatInput: Dispatch<SetStateAction<string>> // Add this line
 }) {
   const [currentFile, setCurrentFile] = useState(files[0].name)
   const currentFileContent = files.find(
@@ -82,9 +87,10 @@ export function FragmentCode({
         </div>
       </div>
       <div className="flex flex-col flex-1 overflow-x-auto">
-        <CodeView
+        <HighlightedCodeView
           code={currentFileContent || ''}
           lang={currentFile.split('.').pop() || ''}
+          setChatInput={setChatInput}
         />
       </div>
     </div>
