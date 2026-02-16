@@ -1,5 +1,51 @@
+# E2B Fragments
+
 ![E2B Fragments Preview Light](/readme-assets/fragments-light.png#gh-light-mode-only)
+
+## Recent Updates and Enhancements
+
+This section outlines the key features and improvements implemented, along with challenges faced and their resolutions.
+
+### 1. Custom Code Highlighting and Interactive Tooltip
+
+**Feature Description:**
+Implemented a custom solution for highlighting selected code snippets within the `CodeView` component. Upon text selection, a dynamic tooltip appears, offering the following functionalities:
+
+-   **Copy:** Copies the selected text to the clipboard.
+-   **Add to Chat:** Inserts the selected text into the chat input field for further discussion or use.
+-   **Edit:** Similar to "Add to Chat," this option also populates the chat input with the selected text, providing a quick way to modify or elaborate on the code.
+
+**Technical Implementation:**
+
+-   Utilized `useState`, `useEffect`, and `useRef` hooks in `highlighted-code-view.tsx` to manage selection state, tooltip visibility, and positioning.
+-   Integrated `lucide-react` for icons (e.g., `Pencil` for the Edit button).
+-   Ensured `setChatInput` function is passed down through the component hierarchy (`app/page.tsx` -> `components/preview.tsx` -> `components/fragment-code.tsx` -> `HighlightedCodeView`) to enable interaction with the chat input.
+
+**Issues Encountered and Resolutions:**
+
+-   **Tooltip Disappearing:** Initially, the tooltip would disappear unexpectedly. This was resolved by adding an `onMouseDown` event listener to the wrapper `div` in `highlighted-code-view.tsx` to explicitly close the tooltip if no active selection is present, ensuring it only appears when text is actively selected.
+
+-   **CSS Specificity for Selection Highlighting:** The custom `::selection` styles in `components/ui/selection.css` were not being applied due to specificity conflicts, especially with `Prism.js`'s default styling. This was fixed by targeting `::selection` within `pre` and `code` tags and using `!important` to override conflicting styles, ensuring consistent highlighting in both light and dark modes.
+
+-   **Tooltip Positioning:** Positioning the tooltip accurately near the last selected character proved challenging. The solution involved capturing the bounding rectangle of the selection using `window.getSelection().getRangeAt(0).getBoundingClientRect()` and dynamically setting the tooltip's `top` and `left` CSS properties based on these coordinates.
+
+### 2. Dark Mode Support for Selection Highlighting
+
+**Feature Description:**
+Enhanced the `::selection` CSS in `components/ui/selection.css` to respect dark mode and light mode preferences. Selected text now displays a light blue background in light mode and a darker blue background in dark mode, maintaining visual consistency with the overall theme.
+
+**Technical Implementation:**
+
+-   Used CSS media queries (`@media (prefers-color-scheme: dark)`) to apply different `background` and `color` properties for `::selection` based on the user's system theme preference.
+
 ![E2B Fragments Preview Dark](/readme-assets/fragments-dark.png#gh-dark-mode-only)
+
+## Code Review
+
+Feel free to review the code and provide feedback:
+
+-   **GitHub Branch:** [https://github.com/tarekdelihasan2010/fragments](https://github.com/tarekdelihasan2010/fragments)
+-   **Miro Board:** [https://miro.com/app/board/uXjVG_pygAQ=/?share_link_id=614924259725](https://miro.com/app/board/uXjVG_pygAQ=/?share_link_id=614924259725)
 
 # Fragments by E2B
 
